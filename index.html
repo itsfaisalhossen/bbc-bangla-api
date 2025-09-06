@@ -37,16 +37,28 @@
         <div class="w-10/12 mx-auto flex items-center gap-5">
           <ul
             id="category-container"
-            class="flex items-center gap-5 h[42px]"
+            class="flex items-center gap-5 h-[42px]"
           ></ul>
         </div>
       </section>
 
-      <section class="w-10/12 mx-auto">
+      <section
+        class="w-10/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-10 gap-5"
+      >
         <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-10"
+          class="grid col-span-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
           id="news-container"
-        ></div>
+        >
+          <div class="bg-red-500 p-3 text-white">Loading....</div>
+        </div>
+        <div class="col-span-1 w-full">
+          <h2
+            class="text-white flex justify-between items-center p-3 rounded bg-red-600 w-full"
+          >
+            Book Mark <span id="bookmark-count">0</span>
+          </h2>
+          <div class="w-full" id="bookmark-container"></div>
+        </div>
       </section>
     </main>
     <footer>

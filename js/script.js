@@ -1,5 +1,9 @@
-const categoryContainer = document.getElementById("category-container");
+const bookmarkCount = document.getElementById("bookmark-count");
 const newsContainer = document.getElementById("news-container");
+const categoryContainer = document.getElementById("category-container");
+const bookmarkContainer = document.getElementById("bookmark-container");
+
+let bookmarks = [];
 
 const loadCategories = () => {
   try {
@@ -16,17 +20,17 @@ const loadCategories = () => {
 };
 
 const loadNewsByCategory = async (newsId) => {
-  try {
-    const url = `https://news-api-fs.vercel.app/api/categories/${newsId}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        const categoryNews = data.articles;
-        displayNews(categoryNews);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+  const url = `https://news-api-fs.vercel.app/api/categories/${newsId}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      const categoryNews = data.articles;
+      displayNews(categoryNews);
+    })
+    .catch((err) => {
+      showError();
+      alert("Something wen worng");
+    });
 };
 
 const displayCategories = (newsCategories) => {
@@ -43,6 +47,7 @@ const displayCategories = (newsCategories) => {
       li.classList.remove("border-b-4");
     });
     if (e.target.localName === "li") {
+      showLoading();
       e.target.classList.add("border-b-4");
       loadNewsByCategory(e.target.id);
     }
@@ -50,16 +55,76 @@ const displayCategories = (newsCategories) => {
 };
 
 const displayNews = (newsDetails) => {
+  if (newsDetails.length === 0) {
+    showEmtyMessage();
+    alert("No news found for this category");
+    return;
+  }
   newsContainer.innerHTML = "";
   newsDetails.forEach((article) => {
     newsContainer.innerHTML += `
-        <div class="w-full">
-          <img class="w-full" src="${article.image.srcset[6].url}"/>
-          <p class="text-lg font-medium">${article.title}</p>
-          <p>${article.time}</p>
+        <div id="${article.id}" class="wfull flex flex-col justify-between h-[100%] border-1 p-2 rounded border-gray-200">
+    
+          <img class="w-full rounded" src="${article.image.srcset[6].url}"/>
+          <h3 class="text-lg font-medium my-3">${article.title}</h3>
+          <p class="mb-5">${article.time}</p>
+      
+          <button class="btn w-[40%]">BookMark</button>
         </div>
     `;
   });
+};
+
+newsContainer.addEventListener("click", (e) => {
+  if (e.target.innerText === "BookMark") {
+    handleBookMarks(e);
+  }
+});
+
+const handleBookMarks = (e) => {
+  const title = e.target.parentNode.children[1].innerText;
+  const id = e.target.parentNode.id;
+  const x = { title, id };
+  bookmarks.push(x);
+  showBookMarks(bookmarks);
+};
+
+const showBookMarks = (bookmarks) => {
+  bookmarkContainer.innerHTML = "";
+  bookmarks.forEach((bookMarkItem) => {
+    bookmarkContainer.innerHTML += `
+    <div class="my-3 p-2 bg-gray-200 rounded">
+      <h2>${bookMarkItem.title}</h2>
+      <button onclick="handleBookDelete('${bookMarkItem.id}')" class="btn btn-xs">Delete</button>
+    </div>
+    `;
+  });
+  bookmarkCount.innerText = bookmarks.length;
+};
+
+const handleBookDelete = (id) => {
+  const filteredBookMarks = bookmarks.filter((bMark) => bMark.id !== id);
+  console.log(filteredBookMarks);
+  bookmarks = filteredBookMarks;
+  showBookMarks(bookmarks);
+};
+
+const showLoading = () => {
+  newsContainer.innerHTML = `
+      <div class="bg-green-500 p-3 text-white">Loading....</div>
+   `;
+};
+
+const showError = () => {
+  newsContainer.innerHTML = `
+    <div class="bg-red-500 p-3 text-white">Something went worng</div>
+  `;
+};
+
+const showEmtyMessage = () => {
+  newsContainer.innerHTML = `
+       <div class="bg-orange-500 p-3 text-white">No news found this category</div>
+  `;
 };
 
 loadCategories();
