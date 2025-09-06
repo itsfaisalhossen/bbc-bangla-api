@@ -89,8 +89,8 @@ newsContainer.addEventListener("click", (e) => {
 });
 
 const handleBookMarks = (e) => {
-  const title = e.target.parentNode.children[1].innerText;
-  const id = e.target.parentNode.id;
+  const title = e.target.parentNode.parentNode.children[1].innerText;
+  const id = e.target.parentNode.parentNode.id;
   const x = { title, id };
   bookmarks.push(x);
   showBookMarks(bookmarks);
