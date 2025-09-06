@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind css and daisyUI -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>BBC Bangla</title>
+    <style>
+      .font-bengali {
+        font-family: "Noto Sans Bengali", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="font-bengali">
+    <header class="bg-red-700">
+      <div class="shadow-sm w-10/12 mx-auto py-4">
+        <a class="invert text-xl cursor-pointer">
+          <img src="./assets/logo.svg" alt=""
+        /></a>
+      </div>
+    </header>
+    <main>
+      <section class="border-b-1 border-gray-300">
+        <div class="w-10/12 mx-auto flex items-center gap-5">
+          <ul
+            id="category-container"
+            class="flex items-center gap-5 h[42px]"
+          ></ul>
+        </div>
+      </section>
+
+      <section class="w-10/12 mx-auto">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-10"
+          id="news-container"
+        ></div>
+      </section>
+    </main>
+    <footer>
+      <div class="bg-red-700 py-3">
+        <div class="w-10/12 mx-auto">
+          <a href="" class="invert text-xl cursor-pointer">
+            <img src="./assets/logo.svg" alt="" />
+          </a>
+        </div>
+      </div>
+      <div class="bg-slate-950">
+        <div class="text-white w-10/12 mx-auto py-10">
+          <p class="">বিবিসির ওপর কেন আপনি আস্থা রাখতে পারেন</p>
+          <div class="border-t-2 border-gray-400 my-6"></div>
+          <div
+            class="text-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-10"
+          >
+            <div class="w-full">
+              <p>ব্যবহারের শর্তাবলী</p>
+              <p>বিবিসি সম্পর্কে</p>
+            </div>
+            <div class="w-full">
+              <p>প্রিভেসি নীতি</p>
+              <p>কুকিজ</p>
+            </div>
+            <div class="w-full">
+              <p>বিবিসির সাথে যোগাযোগ করুন</p>
+              <p>অন্যান্য ভাষায় বিবিসির সংবাদ</p>
+            </div>
+            <div class="w-full">
+              <p>Do not share or sell my info</p>
+            </div>
+          </div>
+          <div class="border-t-2 border-gray-400 mb-6"></div>
+          <div class="flex flex-col md:flex-row md:items-center md:gap-5 gap-3">
+            <p>
+              2025 বিবিসি। বাইরের কোন সাইটের তথ্যের জন্য বিবিসি দায়বদ্ধ নয়।
+            </p>
+            <p>বাইরের লিংক সম্পর্কে বিবিসির দৃষ্টিভঙ্গি সম্বন্ধে পড়ুন।</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
