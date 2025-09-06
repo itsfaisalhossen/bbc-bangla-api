@@ -41,7 +41,6 @@
           ></ul>
         </div>
       </section>
-
       <section
         class="w-10/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-10 gap-5"
       >
@@ -60,6 +59,21 @@
           <div class="w-full" id="bookmark-container"></div>
         </div>
       </section>
+
+      <!-- Open the modal using ID.showModal() method -->
+      <dialog
+        id="news-details-modal"
+        class="modal modal-bottom sm:modal-middle"
+      >
+        <div class="modal-box">
+          <div id="modal-conatiner"></div>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </main>
     <footer>
       <div class="bg-red-700 py-3">

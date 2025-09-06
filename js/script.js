@@ -1,10 +1,11 @@
 const bookmarkCount = document.getElementById("bookmark-count");
 const newsContainer = document.getElementById("news-container");
+const modalContainer = document.getElementById("modal-conatiner");
+const newsDetailsModal = document.getElementById("news-details-modal");
 const categoryContainer = document.getElementById("category-container");
 const bookmarkContainer = document.getElementById("bookmark-container");
 
 let bookmarks = [];
-
 const loadCategories = () => {
   try {
     const url = `https://news-api-fs.vercel.app/api/categories`;
@@ -69,7 +70,10 @@ const displayNews = (newsDetails) => {
           <h3 class="text-lg font-medium my-3">${article.title}</h3>
           <p class="mb-5">${article.time}</p>
       
-          <button class="btn w-[40%]">BookMark</button>
+        <div class="flex items-center justify-between"> 
+          <button class="btn-xs btn w-[40%]">BookMark</button>
+          <button class="btn-xs btn w-[40%]">ShowDetails</button>
+          </div>
         </div>
     `;
   });
@@ -78,6 +82,9 @@ const displayNews = (newsDetails) => {
 newsContainer.addEventListener("click", (e) => {
   if (e.target.innerText === "BookMark") {
     handleBookMarks(e);
+  }
+  if (e.target.innerText === "ShowDetails") {
+    handleViewDetails(e);
   }
 });
 
@@ -127,12 +134,34 @@ const showEmtyMessage = () => {
   `;
 };
 
+const handleViewDetails = (e) => {
+  const id = e.target.parentNode.parentNode.id;
+  fetch(`https://news-api-fs.vercel.app/api/news/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      showDetailsNews(data.article);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const showDetailsNews = (article) => {
+  newsDetailsModal.showModal();
+  modalContainer.innerHTML = `
+  <h1 class="font-bold">${article.title}</h1>
+  <img class="my-4" src="${article.images[0].url}" />
+  <p>${article.content.join("")}</p>
+  `;
+  console.log(article);
+};
+
 loadCategories();
 loadNewsByCategory("main");
 
 // const loadNewsCategories2 = async () => {
 //   try {
-//     const url = `https://news-api-fs.vercel.app/api/categories`;
+//     const url = `https://news-api-fs.vercel.app/api/     categories`;
 //     const res = await fetch(url);
 //     const data = await res.json();
 //     console.log(data);
